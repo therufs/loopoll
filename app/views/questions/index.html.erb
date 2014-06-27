@@ -21,7 +21,7 @@
     </thead>
 
     <tbody>
-      <% @questions.created.each do |question| %>
+      <% current_user.questions.each do |question| %>
         <tr>
           <td><%= question.content %></td>
           <td></td>
@@ -39,9 +39,9 @@
     </thead>
 
     <tbody>
-      <% @questions.each do |question| %>
+      <% current_user.results.each do |question| %>
         <tr>
-          <td></td>
+          <td>question.content</td>
       <% end %>
     </tbody>
   </table>
@@ -58,13 +58,14 @@
     <tbody>
       <% @questions.each do |question| %>
         <tr>
-          <td></td>
+          <% unless question.user == current_user %>
+            <td><%= question.content %></td>
+          <% end %>
       <% end %>
     </tbody>
   </table>
 </div>
 
-
-<br>
+<%= render 'form' %>
 
 <%= link_to 'New Question', new_question_path %>

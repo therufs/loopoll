@@ -14,14 +14,14 @@ class Question < ActiveRecord::Base
   end
 
   def created
-    where(user_id: @current_user)
+    where(user_id: session[:user_id])
   end
 
   def answered
     results.where(user_id: @current_user)
   end
 
-  def to_answer
-    where.not(user_id: @current_user)
+  def self.to_answer_by(user)
+    self.results.where.not( user_id: user.id )
   end
 end

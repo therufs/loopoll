@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :set_session, only: [:show, :edit, :update, :destroy]
 
   # GET /sessions/new
   def new
