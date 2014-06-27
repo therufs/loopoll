@@ -42,12 +42,9 @@ gem 'stack_rescue', group: :development
 gem 'foundation-rails'
 gem 'simple_form'
 gem 'faker', group: [:development, :test]
-gem 'pry'
+gem 'pry-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
 gem 'quiet_assets', '~> 1.0.3'
 
 gem 'font-awesome-rails'
-
-
-
