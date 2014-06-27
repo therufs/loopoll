@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.all
     @question = Question.new
+    @question.answers.build
   end
 
   # GET /questions/1
@@ -16,7 +17,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
-    5.times {@question.answers.build}
+    @question.answers.build
   end
 
   # GET /questions/1/edit
