@@ -11,5 +11,5 @@ class Question < ActiveRecord::Base
     if duedate < DateTime.now
       errors.add(:duedate_invalid, ", poll must end in the future.")
     end
-  end  
+  end
 end
