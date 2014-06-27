@@ -12,22 +12,23 @@
   <% end %>
 
   <div class="field">
-     <%= f.label :content %><br />
+     <%= f.label :content %><br>
      <%= f.text_field :content %>
   </div>
 
   <div class="field">
-     <%= f.label :duedate %><br />
+     <%= f.label :duedate %><br>
      <%= f.date_select :duedate, default: Date.tomorrow  %>
   </div>
 
-  <%= f.fields_for :answers do |ff| %>
-    <div class="field">
-       <%= f.label :content %><br />
-       <%= f.text_field :content %>
+  <% 5.times do |i| %>
+    <div>
+      <%= f.fields_for :answers do |ff| %>
+        <%= ff.label :content, "Answer #{i + 1}" %><br>
+        <%= ff.text_field :content %>
+      <% end %>
     </div>
   <% end %>
-
 
   <div class="actions">
     <%= f.submit %>
