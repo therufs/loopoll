@@ -18,7 +18,10 @@ class QuestionsControllerTest < ActionController::TestCase
 
   test "should create question" do
     assert_difference('Question.count') do
-      post :create, question: {  }
+      post :create, question: {
+         content: "test",
+         duedate: DateTime.now + 1.day
+         }
     end
 
     assert_redirected_to question_path(assigns(:question))
