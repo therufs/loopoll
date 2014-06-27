@@ -59,7 +59,7 @@
       <% @questions.each do |question| %>
         <tr>
           <% unless question.user == current_user %>
-            <td><%= question.content %></td>
+            <td><%= link_to question.content, question %></td>
           <% end %>
       <% end %>
     </tbody>
@@ -68,4 +68,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'New multiple choice question', new_question_path %>
