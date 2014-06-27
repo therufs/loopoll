@@ -12,21 +12,24 @@
   <% end %>
 
   <div class="field">
-     <%= f.label :content %><br />
+     <%= f.label :content %><br>
      <%= f.text_field :content %>
   </div>
 
   <div class="field">
-     <%= f.label :duedate %><br />
+     <%= f.label :duedate %><br>
      <%= f.date_select :duedate, default: Date.tomorrow  %>
   </div>
 
-  <%= f.fields_for :answers do |ff| %>
-    <% ff.text_field :content, default: "Yes" %>
-  <% end %>
+  <div>
+    <%= f.fields_for :answers do |ff| %>
+
+      <%= ff.hidden_field :content, value: "Yes" %>
+    <% end %>
+  </div>
 
   <%= f.fields_for :answers do |ff| %>
-    <% ff.text_field :content, default: "No" %>
+    <% ff.hidden_field :content, value: "No" %>
   <% end %>
 
   <div class="actions">
