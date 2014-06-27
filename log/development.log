@@ -1632,3 +1632,529 @@ Binary data inserted for `string` type on column `password_digest`
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2014-06-27 18:44:33.374929"], ["updated_at", "2014-06-27 18:44:33.374929"]]
   [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "question_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "duedate" date, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.7ms)[0m  CREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "results" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "answer_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX "index_results_on_answer_id" ON "results" ("answer_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+[0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_results_on_user_id" ON "results" ("user_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140626185601')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140626184124')
+  [1m[36m (1.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140626185146')[0m
+  [1m[35m (1.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140626185208')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:10.664920"], ["email", "test@test"], ["name", "test"], ["password_digest", "$2a$10$qGWQimyPXjn8Zg7TX75L4uQ/V.k8uFR.q2l.xP1/v5wckB2febVlq"], ["updated_at", "2014-06-27 20:26:10.664920"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test2@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:10.757994"], ["email", "test2@test"], ["name", "test2"], ["password_digest", "$2a$10$zmU5ugFKZaOox5FusMuoxu2OGdveHmm6HabzQrWXBhgKs6BafvFmW"], ["updated_at", "2014-06-27 20:26:10.757994"]]
+  [1m[36m (6.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'te@runolfonturner.name' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:11.147090"], ["email", "te@runolfonturner.name"], ["name", "Leora Quitzon"], ["password_digest", "$2a$10$Zzd5VH8GjJSF804qPhAwO.o/boWsgoKaB0CPzfKbLgGZxf/HpEN.u"], ["updated_at", "2014-06-27 20:26:11.147090"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'katarina@romaguera.name' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:11.250545"], ["email", "katarina@romaguera.name"], ["name", "Mack Sauer DVM"], ["password_digest", "$2a$10$SjOi4NAhpmJVRGbh18G7muwj1EYum5pnaYQZSVLAMn9fwTCMJPqmu"], ["updated_at", "2014-06-27 20:26:11.250545"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'hosea@daviskling.org' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:11.339702"], ["email", "hosea@daviskling.org"], ["name", "Nayeli Hermiston DVM"], ["password_digest", "$2a$10$ai0lszY8gZiALVbi3subz.IYTJ57/pncboJOgy/b66Dh4dc6qvJcG"], ["updated_at", "2014-06-27 20:26:11.339702"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'shyanne@skiles.org' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:11.427888"], ["email", "shyanne@skiles.org"], ["name", "Gregory Langosh DVM"], ["password_digest", "$2a$10$ehrqfv73eOUbOay1NsPnE.2TeYRNd8RSc0w4aQochjZL9XxObWRky"], ["updated_at", "2014-06-27 20:26:11.427888"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Similique eos aliquid aut sit voluptas fugiat."], ["created_at", "2014-06-27 20:26:11.446286"], ["duedate", "2015-01-01"], ["updated_at", "2014-06-27 20:26:11.446286"], ["user_id", 1]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Sit asperiores mollitia sapiente."], ["created_at", "2014-06-27 20:26:11.450014"], ["duedate", "2015-06-24"], ["updated_at", "2014-06-27 20:26:11.450014"], ["user_id", 1]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Facere eligendi rem reiciendis aliquid maxime."], ["created_at", "2014-06-27 20:26:11.453094"], ["duedate", "2015-12-12"], ["updated_at", "2014-06-27 20:26:11.453094"], ["user_id", 2]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Odit porro."], ["created_at", "2014-06-27 20:26:11.456030"], ["duedate", "2015-06-23"], ["updated_at", "2014-06-27 20:26:11.456030"], ["user_id", 2]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Distinctio veniam in ut optio."], ["created_at", "2014-06-27 20:26:11.459622"], ["duedate", "2015-06-24"], ["updated_at", "2014-06-27 20:26:11.459622"], ["user_id", 2]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Possimus est quibusdam quae eaque."], ["created_at", "2014-06-27 20:26:11.467522"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.467522"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "In corrupti cumque asperiores eligendi provident et dicta exercitationem."], ["created_at", "2014-06-27 20:26:11.470485"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.470485"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Incidunt ea quaerat hic officiis."], ["created_at", "2014-06-27 20:26:11.473384"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.473384"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Qui aut eos itaque sapiente exercitationem reprehenderit officiis."], ["created_at", "2014-06-27 20:26:11.476607"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.476607"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Ratione ea consequatur magnam voluptatem alias."], ["created_at", "2014-06-27 20:26:11.479038"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.479038"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Ullam dignissimos quis ut mollitia provident."], ["created_at", "2014-06-27 20:26:11.481561"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.481561"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Aut et occaecati aut mollitia quia est et nisi non."], ["created_at", "2014-06-27 20:26:11.484902"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.484902"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Officia possimus mollitia quae voluptatem."], ["created_at", "2014-06-27 20:26:11.487413"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:11.487413"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "question_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "duedate" date, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "results" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "answer_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX "index_results_on_answer_id" ON "results" ("answer_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+[0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_results_on_user_id" ON "results" ("user_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140626185601')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140626184124')
+  [1m[36m (1.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140626185146')[0m
+  [1m[35m (1.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140626185208')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:26.025335"], ["email", "test@test"], ["name", "test"], ["password_digest", "$2a$10$fTx/Bl.pjhczD8m1RjRsNu6NpbI2TZE9cNkYUL4youWV6kH2YCGI2"], ["updated_at", "2014-06-27 20:26:26.025335"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test2@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:26.117322"], ["email", "test2@test"], ["name", "test2"], ["password_digest", "$2a$10$HIrGx6iiLiTA4jjNhS4tYOZZGMYZtjvYkd5D2DeF20k4a.SBvm/EK"], ["updated_at", "2014-06-27 20:26:26.117322"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'gus@schamberger.biz' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:26.512800"], ["email", "gus@schamberger.biz"], ["name", "Adelbert Metz"], ["password_digest", "$2a$10$.6G39ZdSIqbVDD5/hdSce.fFk9VIj7ZPLNFqA69UnARfZeE3PTeNO"], ["updated_at", "2014-06-27 20:26:26.512800"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'mack@oberbrunner.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:26.597931"], ["email", "mack@oberbrunner.com"], ["name", "Karianne Brown"], ["password_digest", "$2a$10$O0hZqwCeQNrB0WF3/9vlAuFA56IOBygSK7vDArZ5nEkuk9hGkANKq"], ["updated_at", "2014-06-27 20:26:26.597931"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'rebecca@auer.name' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:26.687519"], ["email", "rebecca@auer.name"], ["name", "Nola Quitzon Jr."], ["password_digest", "$2a$10$GDWlXtFsfKPdtICKZIEE9.Nk1BiTfG/n3cOEzbqKIBKtHfzlipsIa"], ["updated_at", "2014-06-27 20:26:26.687519"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'oren_lakin@hoeger.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:26:26.781049"], ["email", "oren_lakin@hoeger.com"], ["name", "Dr. Cameron Zemlak"], ["password_digest", "$2a$10$SCciX9JHCJBxrDRDUkYOjuCnC4Md5vKFp/mGW0.T5fZF7TchpFGqm"], ["updated_at", "2014-06-27 20:26:26.781049"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Animi eius sint autem quibusdam ullam."], ["created_at", "2014-06-27 20:26:26.797988"], ["duedate", "2015-06-24"], ["updated_at", "2014-06-27 20:26:26.797988"], ["user_id", 1]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Molestiae quae."], ["created_at", "2014-06-27 20:26:26.801425"], ["duedate", "2015-01-01"], ["updated_at", "2014-06-27 20:26:26.801425"], ["user_id", 1]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Saepe recusandae cum voluptatem nesciunt."], ["created_at", "2014-06-27 20:26:26.804447"], ["duedate", "2015-06-23"], ["updated_at", "2014-06-27 20:26:26.804447"], ["user_id", 2]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Soluta voluptates molestiae ut consequatur."], ["created_at", "2014-06-27 20:26:26.807460"], ["duedate", "2015-01-01"], ["updated_at", "2014-06-27 20:26:26.807460"], ["user_id", 2]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Fugiat et aspernatur sunt natus animi."], ["created_at", "2014-06-27 20:26:26.810780"], ["duedate", "2015-12-12"], ["updated_at", "2014-06-27 20:26:26.810780"], ["user_id", 2]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Delectus illo eos ut sed."], ["created_at", "2014-06-27 20:26:26.818479"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.818479"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Ut omnis facere iusto velit ipsum est repellendus."], ["created_at", "2014-06-27 20:26:26.821338"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.821338"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Eos modi consequatur quo iusto cupiditate dolores."], ["created_at", "2014-06-27 20:26:26.824227"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.824227"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Nemo ut est natus quia adipisci distinctio quis quidem numquam."], ["created_at", "2014-06-27 20:26:26.826507"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.826507"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Minus voluptas voluptatibus sed qui."], ["created_at", "2014-06-27 20:26:26.829023"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.829023"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Sed accusantium magnam libero fugiat dolorum autem voluptatum voluptas in."], ["created_at", "2014-06-27 20:26:26.832059"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.832059"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Voluptatibus nesciunt necessitatibus tempora repellat dolores sunt sequi inventore."], ["created_at", "2014-06-27 20:26:26.834758"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.834758"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Vitae beatae sequi sed est modi quam."], ["created_at", "2014-06-27 20:26:26.837556"], ["question_id", 1], ["updated_at", "2014-06-27 20:26:26.837556"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.846286"], ["updated_at", "2014-06-27 20:26:26.846286"], ["user_id", 1]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.850266"], ["updated_at", "2014-06-27 20:26:26.850266"], ["user_id", 1]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.855720"], ["updated_at", "2014-06-27 20:26:26.855720"], ["user_id", 1]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.859234"], ["updated_at", "2014-06-27 20:26:26.859234"], ["user_id", 1]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.863519"], ["updated_at", "2014-06-27 20:26:26.863519"], ["user_id", 1]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.868014"], ["updated_at", "2014-06-27 20:26:26.868014"], ["user_id", 1]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.872235"], ["updated_at", "2014-06-27 20:26:26.872235"], ["user_id", 1]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.875684"], ["updated_at", "2014-06-27 20:26:26.875684"], ["user_id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.878716"], ["updated_at", "2014-06-27 20:26:26.878716"], ["user_id", 1]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.882493"], ["updated_at", "2014-06-27 20:26:26.882493"], ["user_id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.885564"], ["updated_at", "2014-06-27 20:26:26.885564"], ["user_id", 1]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.888562"], ["updated_at", "2014-06-27 20:26:26.888562"], ["user_id", 1]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:26:26.891955"], ["updated_at", "2014-06-27 20:26:26.891955"], ["user_id", 1]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "question_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "duedate" date, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.2ms)[0m  CREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "results" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "answer_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_results_on_answer_id" ON "results" ("answer_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_results_on_user_id" ON "results" ("user_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (1.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140626185601')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140626184124')
+  [1m[36m (1.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140626185146')[0m
+  [1m[35m (1.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140626185208')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:49:51.523954"], ["email", "test@test"], ["name", "test"], ["password_digest", "$2a$10$r7Tx/OjK.o62gu4DzebRMefjoH1.gYy47i3VKgJbW4q4onB15N/H."], ["updated_at", "2014-06-27 20:49:51.523954"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test2@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:49:51.615944"], ["email", "test2@test"], ["name", "test2"], ["password_digest", "$2a$10$KujjCTjHdOurEARHnuejh.m571F9Y7or3ekaUHM.YFQvLbchq0rMa"], ["updated_at", "2014-06-27 20:49:51.615944"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'roselyn.bergstrom@tillman.info' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:49:52.016924"], ["email", "roselyn.bergstrom@tillman.info"], ["name", "Ova Nikolaus"], ["password_digest", "$2a$10$Pgj3quAxAPzuT/xWnoZDcOze.Ud6cE92QHBYMWCZv8K41CU.KM7JC"], ["updated_at", "2014-06-27 20:49:52.016924"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'liza_leannon@little.info' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:49:52.112671"], ["email", "liza_leannon@little.info"], ["name", "Andre Feeney II"], ["password_digest", "$2a$10$SJqWGg0kMM0eZtVQpxNwl.ISEkjV7R8aO6wLdoLR04zaEcHgOdSom"], ["updated_at", "2014-06-27 20:49:52.112671"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jacklyn@auer.org' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:49:52.225207"], ["email", "jacklyn@auer.org"], ["name", "Cynthia Pfannerstill"], ["password_digest", "$2a$10$I..cNGqJdApILfNILowbrOxFPd8A.tKuCFo/dL1rpJiZrTKiiyaEq"], ["updated_at", "2014-06-27 20:49:52.225207"]]
+  [1m[36m (21.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'ben_farrell@robel.net' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:49:52.344869"], ["email", "ben_farrell@robel.net"], ["name", "Onie O'Kon"], ["password_digest", "$2a$10$9U/SijKMcenSrSh0KEMSd.nCILchb6LywKqjdgqGoW5Fv5uahLc2W"], ["updated_at", "2014-06-27 20:49:52.344869"]]
+  [1m[36m (3.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Aspernatur quo."], ["created_at", "2014-06-27 20:49:52.359869"], ["duedate", "2015-12-12"], ["updated_at", "2014-06-27 20:49:52.359869"], ["user_id", 1]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Placeat sit harum rerum."], ["created_at", "2014-06-27 20:49:52.364818"], ["duedate", "2015-01-01"], ["updated_at", "2014-06-27 20:49:52.364818"], ["user_id", 1]]
+  [1m[36m (3.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Officiis necessitatibus incidunt libero unde similique est."], ["created_at", "2014-06-27 20:49:52.370133"], ["duedate", "2015-06-23"], ["updated_at", "2014-06-27 20:49:52.370133"], ["user_id", 2]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Dignissimos ipsa quae omnis ipsum."], ["created_at", "2014-06-27 20:49:52.373982"], ["duedate", "2015-06-24"], ["updated_at", "2014-06-27 20:49:52.373982"], ["user_id", 2]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "A pariatur."], ["created_at", "2014-06-27 20:49:52.378672"], ["duedate", "2015-06-24"], ["updated_at", "2014-06-27 20:49:52.378672"], ["user_id", 2]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Perferendis inventore aperiam laborum animi error rerum aut quo."], ["created_at", "2014-06-27 20:49:52.389225"], ["question_id", 2], ["updated_at", "2014-06-27 20:49:52.389225"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Dolorum molestiae quo harum maiores nobis nihil aut."], ["created_at", "2014-06-27 20:49:52.393709"], ["question_id", 5], ["updated_at", "2014-06-27 20:49:52.393709"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Quia ut aperiam expedita assumenda beatae fuga dolorem eum odit."], ["created_at", "2014-06-27 20:49:52.396871"], ["question_id", 2], ["updated_at", "2014-06-27 20:49:52.396871"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Temporibus modi iusto ullam in laborum eos."], ["created_at", "2014-06-27 20:49:52.401461"], ["question_id", 1], ["updated_at", "2014-06-27 20:49:52.401461"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Praesentium corrupti quasi repudiandae quo accusamus dolorem commodi est iure."], ["created_at", "2014-06-27 20:49:52.404647"], ["question_id", 3], ["updated_at", "2014-06-27 20:49:52.404647"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Laboriosam optio ut ab iste totam."], ["created_at", "2014-06-27 20:49:52.407553"], ["question_id", 5], ["updated_at", "2014-06-27 20:49:52.407553"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Magni id sed alias eum voluptatem dolores rem."], ["created_at", "2014-06-27 20:49:52.410336"], ["question_id", 3], ["updated_at", "2014-06-27 20:49:52.410336"]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Sed vitae voluptatem dolore velit aspernatur in vel."], ["created_at", "2014-06-27 20:49:52.414514"], ["question_id", 3], ["updated_at", "2014-06-27 20:49:52.414514"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:49:52.424140"], ["updated_at", "2014-06-27 20:49:52.424140"], ["user_id", 1]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 6], ["created_at", "2014-06-27 20:49:52.429988"], ["updated_at", "2014-06-27 20:49:52.429988"], ["user_id", 2]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 8], ["created_at", "2014-06-27 20:49:52.433880"], ["updated_at", "2014-06-27 20:49:52.433880"], ["user_id", 2]]
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:49:52.439346"], ["updated_at", "2014-06-27 20:49:52.439346"], ["user_id", 1]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 8], ["created_at", "2014-06-27 20:49:52.443592"], ["updated_at", "2014-06-27 20:49:52.443592"], ["user_id", 1]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 7], ["created_at", "2014-06-27 20:49:52.448034"], ["updated_at", "2014-06-27 20:49:52.448034"], ["user_id", 2]]
+  [1m[35m (3.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 6], ["created_at", "2014-06-27 20:49:52.453455"], ["updated_at", "2014-06-27 20:49:52.453455"], ["user_id", 1]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 6], ["created_at", "2014-06-27 20:49:52.457122"], ["updated_at", "2014-06-27 20:49:52.457122"], ["user_id", 2]]
+  [1m[35m (3.7ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 6], ["created_at", "2014-06-27 20:49:52.462681"], ["updated_at", "2014-06-27 20:49:52.462681"], ["user_id", 2]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:49:52.466933"], ["updated_at", "2014-06-27 20:49:52.466933"], ["user_id", 2]]
+  [1m[35m (3.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 7], ["created_at", "2014-06-27 20:49:52.472265"], ["updated_at", "2014-06-27 20:49:52.472265"], ["user_id", 1]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 7], ["created_at", "2014-06-27 20:49:52.476570"], ["updated_at", "2014-06-27 20:49:52.476570"], ["user_id", 1]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 6], ["created_at", "2014-06-27 20:49:52.481368"], ["updated_at", "2014-06-27 20:49:52.481368"], ["user_id", 1]]
+  [1m[36m (3.5ms)[0m  [1mcommit transaction[0m
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20140626184124)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140626184124"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+Migrating to CreateQuestions (20140626185146)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "duedate" date, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140626185146"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+Migrating to CreateResults (20140626185208)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "results" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "answer_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_results_on_user_id" ON "results" ("user_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_results_on_answer_id" ON "results" ("answer_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140626185208"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+Migrating to CreateAnswers (20140626185601)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "question_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140626185601"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_questions_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_questions_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_user_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:55:39.964740"], ["email", "test@test"], ["name", "test"], ["password_digest", "$2a$10$AMj7xVZiq1IPl3BQ3VVn2.dGMDLtSUQZz/Y7To4EnkA84gipRPCMC"], ["updated_at", "2014-06-27 20:55:39.964740"]]
+  [1m[36m (156.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test2@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:55:40.217098"], ["email", "test2@test"], ["name", "test2"], ["password_digest", "$2a$10$a4QLGjuoZKU7kq/APdm3TuOz8HItx4c.6iCKDsqAUXdnq1CQdCE4O"], ["updated_at", "2014-06-27 20:55:40.217098"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'veda.volkman@carroll.biz' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:55:40.600593"], ["email", "veda.volkman@carroll.biz"], ["name", "Ines Klocko"], ["password_digest", "$2a$10$/h4tFIiqSewZNWgNOXMD6eFGGcCUB6yNu8PsOFOUEI3f4v48xdZ7."], ["updated_at", "2014-06-27 20:55:40.600593"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'lulu_rice@greenholtdenesik.org' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:55:40.695068"], ["email", "lulu_rice@greenholtdenesik.org"], ["name", "Mr. Cleveland Borer"], ["password_digest", "$2a$10$sfv8MpvQYi6.LAfSqHQHTOGRWiyRuCcJsQ/Ai8RIpH93fA8KXjCqu"], ["updated_at", "2014-06-27 20:55:40.695068"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'winston@gislasonmetz.org' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:55:40.791192"], ["email", "winston@gislasonmetz.org"], ["name", "Vivian Quitzon II"], ["password_digest", "$2a$10$TWp3XltiZK0JyCGhbctu1e370OoaVRL9DzrszAbU28WF0dsg4PuRG"], ["updated_at", "2014-06-27 20:55:40.791192"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'emelia.smith@corwin.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-27 20:55:40.883494"], ["email", "emelia.smith@corwin.com"], ["name", "Dr. Carter Tremblay"], ["password_digest", "$2a$10$OPeBRdz5AQRnbCzDO6pT3.CIlpy2xzZ.8EdJ40l684g9eU1jCeeaq"], ["updated_at", "2014-06-27 20:55:40.883494"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Quibusdam suscipit ipsa amet."], ["created_at", "2014-06-27 20:55:40.901489"], ["duedate", "2015-06-23"], ["updated_at", "2014-06-27 20:55:40.901489"], ["user_id", 1]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Nisi eligendi."], ["created_at", "2014-06-27 20:55:40.905036"], ["duedate", "2015-12-12"], ["updated_at", "2014-06-27 20:55:40.905036"], ["user_id", 1]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Accusantium ipsa sunt dicta hic doloribus incidunt."], ["created_at", "2014-06-27 20:55:40.908060"], ["duedate", "2015-01-01"], ["updated_at", "2014-06-27 20:55:40.908060"], ["user_id", 2]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["content", "Dolore doloribus quaerat ratione aut."], ["created_at", "2014-06-27 20:55:40.911834"], ["duedate", "2015-01-01"], ["updated_at", "2014-06-27 20:55:40.911834"], ["user_id", 2]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "questions" ("content", "created_at", "duedate", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["content", "Aut et neque ipsum."], ["created_at", "2014-06-27 20:55:40.915006"], ["duedate", "2015-12-12"], ["updated_at", "2014-06-27 20:55:40.915006"], ["user_id", 2]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Dolor quibusdam ipsam amet temporibus in voluptatem aperiam et et."], ["created_at", "2014-06-27 20:55:40.923969"], ["question_id", 2], ["updated_at", "2014-06-27 20:55:40.923969"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Deserunt autem iusto perspiciatis magnam et nulla."], ["created_at", "2014-06-27 20:55:40.928107"], ["question_id", 1], ["updated_at", "2014-06-27 20:55:40.928107"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Ut autem eum omnis atque iusto nesciunt quia."], ["created_at", "2014-06-27 20:55:40.930934"], ["question_id", 4], ["updated_at", "2014-06-27 20:55:40.930934"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Vero adipisci quo omnis unde."], ["created_at", "2014-06-27 20:55:40.933976"], ["question_id", 4], ["updated_at", "2014-06-27 20:55:40.933976"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Sequi molestiae inventore explicabo atque."], ["created_at", "2014-06-27 20:55:40.936903"], ["question_id", 2], ["updated_at", "2014-06-27 20:55:40.936903"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Vel dolorum et cum sit ipsum assumenda exercitationem."], ["created_at", "2014-06-27 20:55:40.940376"], ["question_id", 1], ["updated_at", "2014-06-27 20:55:40.940376"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Reprehenderit ipsam consectetur quos et est nam doloribus aliquam qui."], ["created_at", "2014-06-27 20:55:40.944058"], ["question_id", 4], ["updated_at", "2014-06-27 20:55:40.944058"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Omnis distinctio voluptas voluptate id inventore et exercitationem."], ["created_at", "2014-06-27 20:55:40.946966"], ["question_id", 2], ["updated_at", "2014-06-27 20:55:40.946966"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 7], ["created_at", "2014-06-27 20:55:40.957080"], ["updated_at", "2014-06-27 20:55:40.957080"], ["user_id", 1]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 8], ["created_at", "2014-06-27 20:55:40.961854"], ["updated_at", "2014-06-27 20:55:40.961854"], ["user_id", 2]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 3], ["created_at", "2014-06-27 20:55:40.966949"], ["updated_at", "2014-06-27 20:55:40.966949"], ["user_id", 2]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 4], ["created_at", "2014-06-27 20:55:40.970991"], ["updated_at", "2014-06-27 20:55:40.970991"], ["user_id", 1]]
+  [1m[35m (2.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 3], ["created_at", "2014-06-27 20:55:40.975307"], ["updated_at", "2014-06-27 20:55:40.975307"], ["user_id", 2]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 3], ["created_at", "2014-06-27 20:55:40.978815"], ["updated_at", "2014-06-27 20:55:40.978815"], ["user_id", 2]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 3], ["created_at", "2014-06-27 20:55:40.981851"], ["updated_at", "2014-06-27 20:55:40.981851"], ["user_id", 2]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 5], ["created_at", "2014-06-27 20:55:40.986386"], ["updated_at", "2014-06-27 20:55:40.986386"], ["user_id", 1]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 8], ["created_at", "2014-06-27 20:55:40.990246"], ["updated_at", "2014-06-27 20:55:40.990246"], ["user_id", 2]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 2], ["created_at", "2014-06-27 20:55:40.993556"], ["updated_at", "2014-06-27 20:55:40.993556"], ["user_id", 1]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 1], ["created_at", "2014-06-27 20:55:40.997783"], ["updated_at", "2014-06-27 20:55:40.997783"], ["user_id", 1]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 1], ["created_at", "2014-06-27 20:55:41.001593"], ["updated_at", "2014-06-27 20:55:41.001593"], ["user_id", 1]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 2], ["created_at", "2014-06-27 20:55:41.005048"], ["updated_at", "2014-06-27 20:55:41.005048"], ["user_id", 2]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
