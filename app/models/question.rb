@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
   validates :content, :duedate, presence: true
-  validate  :future_due_date
+  validate :future_due_date
   #TODO: validate that a question has at least 2 answers
 
   belongs_to :user
@@ -9,7 +9,19 @@ class Question < ActiveRecord::Base
 
   def future_due_date #TODO: test for this validation
     if duedate < DateTime.now
-      errors.add(:duedate_invalid, ", poll must end in the future.")
+      errors.add(:duedate, ", poll must end in the future.")
     end
-  end  
+  end
+
+  def created
+    where(user_id: @current_user)
+  end
+
+  def answered
+    results.where(user_id: @current_user)
+  end
+
+  def to_answer
+    where.not(user_id: @current_user)
+  end
 end

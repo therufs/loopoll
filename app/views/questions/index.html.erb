@@ -21,7 +21,7 @@
     </thead>
 
     <tbody>
-      <% @questions.each do |question| %>
+      <% @questions.created.each do |question| %>
         <tr>
           <td><%= question.content %></td>
           <td></td>
