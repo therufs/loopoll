@@ -1,22 +1,32 @@
 <h1>Listing questions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- Latest questions created by the current_user, left at top -->
+<!-- link to all questions created -->
 
-  <tbody>
-    <% @questions.each do |question| %>
+<!-- Latest questions answered by current_user, left bottom -->
+<!-- link to all questions answered -->
+
+<!-- Questions to answer ordered by due date, right -->
+<!-- link to all question to answer (maybe using pagination)-->
+
+<!-- field to create a new Yes/No question or a button for a Multiple Choice one -->
+
+<div class="large-5 columns right">
+  <table>
+    <thead>
       <tr>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.content %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
