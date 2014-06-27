@@ -14,7 +14,14 @@ User.create(
       password_confirmation: "test"
 )
 
-5.times do
+User.create(
+      name: "test2",
+      email: "test2@test",
+      password: "test",
+      password_confirmation: "test"
+)
+
+4.times do
 User.create(
       name: Faker::Name.name,
       email: Faker::Internet.email,
@@ -25,10 +32,19 @@ end
 
 @dates = ['2015-06-23','2015-12-12','2015-06-24','2015-01-01']
 
-5.times do
+2.times do
   Question.create(
       content: Faker::Lorem.sentence(2),
-      duedate: @dates.sample
+      duedate: @dates.sample,
+      user_id: 1
+)
+end
+
+3.times do
+  Question.create(
+      content: Faker::Lorem.sentence(2),
+      duedate: @dates.sample,
+      user_id: 2
 )
 end
 
@@ -42,6 +58,6 @@ end
 13.times do
   Result.create(
       answer_id: [1..8].sample,
-      user_id: [1..6].sample
+      user_id: [1..2].sample
   )
 end
