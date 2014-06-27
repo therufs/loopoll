@@ -39,9 +39,9 @@
     </thead>
 
     <tbody>
-      <% current_user.results.each do |question| %>
+      <% current_user.results.each do |result| %>
         <tr>
-          <td>question.content</td>
+          <td><%= result.answer.question.content %></td>
       <% end %>
     </tbody>
   </table>

@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    5.times {@question.answers.build}
   end
 
   # GET /questions/1/edit

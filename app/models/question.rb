@@ -6,6 +6,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :results, :through => :users
   has_many :answers
+  accepts_nested_attributes_for :answers,
+    reject_if: lambda { |answer| answer['content'].blank? }
 
   def future_due_date #TODO: test for this validation
     if duedate < DateTime.now
