@@ -29,9 +29,9 @@ class ResultsController < ApplicationController
     respond_to do |format|
       if @result.save
         format.html { redirect_to @result, notice: 'Result was successfully created.' }
-        format.json { render :show, status: :created, location: @result }
+        format.json { render @result.answer.question, status: :created, location: @result }
       else
-        format.html { render :new }
+        format.html { redirect_to @result.answer.question, notice: 'You already voted on this question.' }
         format.json { render json: @result.errors, status: :unprocessable_entity }
       end
     end
