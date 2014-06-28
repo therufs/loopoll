@@ -4,8 +4,9 @@ class Question < ActiveRecord::Base
   #TODO: validate that a question has at least 2 answers
 
   belongs_to :user
-  has_many :results, :through => :users
+  # has_many :results, :through => :users
   has_many :answers
+  has_many :results, :through => :answers
   accepts_nested_attributes_for :answers,
     reject_if: lambda { |answer| answer['content'].blank? }
 

@@ -1,4 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @result.answer.question.content %></h2>
+<!-- time to answer -->
+<!-- charts -->
+
+<%= bar_chart @result.answer.question.results.group(:answer_id).count %>
+
+
+
+
 <%= link_to 'Edit', edit_result_path(@result) %> |
 <%= link_to 'Back', results_path %>
