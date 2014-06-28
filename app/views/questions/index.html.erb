@@ -23,7 +23,7 @@
     <tbody>
       <% current_user.questions.each do |question| %>
         <tr>
-          <td><%= link_to question.content, question.results.first %></td>
+          <td><%= link_to question.content, question %></td>
           <td><%= question.results.count %></td>
         </tr>
       <% end %>
@@ -59,7 +59,7 @@
     <tbody>
       <% @questions.each do |question| %>
         <tr>
-          <% unless question.user == current_user %>
+          <% unless question.user == current_user || @question.answered? %>
             <td><%= link_to question.content, question %></td>
           <% end %>
       <% end %>

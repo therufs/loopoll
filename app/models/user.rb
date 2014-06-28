@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
 
   has_many :questions
   has_many :results
+  has_many :answers, through: :results
 end

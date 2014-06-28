@@ -2,26 +2,39 @@
 
 <h2><%= @question.content %></h2>
 
-<%= form_for(@result) do |f| %>
-  <% if @result.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@result.errors.count, "error") %> prohibited this result from being saved:</h2>
+<% if @question.answered? || @question.user == current_user %>
 
-      <ul>
-      <% @result.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @question.multiple_choice? %>
+    <%= pie_chart @question.results.group(:answer_id).count %>
+  <% else %>
+    <%= bar_chart @question.results.group(:answer_id).count %>
+  <% end %>
+<% else %>
+
+  <%= form_for(@result) do |f| %>
+    <% if @result.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@result.errors.count, "error") %> prohibited this result from being saved:</h2>
+
+        <ul>
+        <% @result.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <% answers = @question.answers %>
+      <%= f.collection_radio_buttons :answer_id, answers, :id, :content %>
+    </div>
+    <div>
+      <%= f.submit "Vote!" %>
     </div>
   <% end %>
-
-  <div>
-    <% answers = @question.answers %>
-    <%= f.collection_radio_buttons :answer_id, answers, :id, :content %>
-  </div>
-  <div>
-    <%= f.submit "Vote!" %>
-  </div>
 <% end %>
+
+
+
 
 <%= link_to 'Back', questions_path %>
