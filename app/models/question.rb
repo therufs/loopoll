@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   #TODO: validate that a question has at least 2 answers
 
   belongs_to :user
-  has_many :answers
+  has_many :answers, dependent: :destroy
   has_many :results, through: :answers
   accepts_nested_attributes_for :answers,
     reject_if: lambda { |answer| answer['content'].blank? }
@@ -19,12 +19,12 @@ class Question < ActiveRecord::Base
     where(user_id: session[:user_id])
   end
 
-  def answered
-    results.where(user_id: @current_user)
+  def answered(user)
+    results.where(user_id: user.id)
   end
 
-  def answered?
-    answered.any?
+  def answered?(user)
+    answered(user).any?
   end
 
   def self.to_answer_by(user)
@@ -35,6 +35,7 @@ class Question < ActiveRecord::Base
     answers.count > 2
   end
 
-
-
+  def days_left
+    (duedate - Date.today).to_i
+  end
 end

@@ -17,6 +17,7 @@
       <tr>
         <th>created question</th>
         <th>answers received</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -25,6 +26,7 @@
         <tr>
           <td><%= link_to question.content, question %></td>
           <td><%= question.results.count %></td>
+          <td><%= link_to "Delete", question, method: :delete, data: { confirm: 'Are you sure you want to delete this question and its answers?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -52,15 +54,19 @@
   <table>
     <thead>
       <tr>
-        <th colspan="3">questions to answer</th>
+        <th>Questions to answer</th>
+        <th>Question creator</th>
+        <th>Days left to answer</th>
       </tr>
     </thead>
 
     <tbody>
       <% @questions.each do |question| %>
         <tr>
-          <% unless question.user == current_user || @question.answered? %>
+          <% unless question.user == current_user || question.answered?(current_user) || question.duedate < Date.today %>
             <td><%= link_to question.content, question %></td>
+            <td><%= question.user.name %></td>
+            <td><%= pluralize(question.days_left, "day") %></td>
           <% end %>
       <% end %>
     </tbody>

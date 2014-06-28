@@ -83,14 +83,22 @@ end
 
 8.times do
   Answer.create(
-      content: Faker::Lorem.sentence(5),
-      question_id: [2,3,4,5].sample
+      content: Faker::Lorem.sentence(5)
+      question_id:
+
   )
 end
 
-13.times do
+3.times do
   Result.create(
       answer_id: [3,4,5,6,7,8].sample,
       user_id: [1,2].sample
+  )
+end
+
+8.times do
+  Result.create(
+      answer_id: [3,4,5,6,7,8].sample,
+      user_id: [3,4,5,6].sample
   )
 end
