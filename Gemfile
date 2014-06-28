@@ -48,3 +48,4 @@ gem 'binding_of_caller'
 gem 'quiet_assets', '~> 1.0.3'
 
 gem 'font-awesome-rails'
+gem "chartkick"

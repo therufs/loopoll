@@ -32,6 +32,39 @@ end
 
 @dates = ['2015-06-23','2015-12-12','2015-06-24','2015-01-01']
 
+
+Question.create(
+  content: "Test for Yes/No results",
+  duedate: DateTime.now + 1.day,
+  user_id: 2
+)
+
+Answer.create(
+  content: "Yes",
+  question_id: 1
+)
+
+Answer.create(
+  content: "No",
+  question_id: 1
+)
+
+5.times do
+  Result.create(
+  answer_id: 1,
+  user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+15.times do
+  Result.create(
+  answer_id: 2,
+  user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+
+
 2.times do
   Question.create(
       content: Faker::Lorem.sentence(2),
@@ -51,13 +84,13 @@ end
 8.times do
   Answer.create(
       content: Faker::Lorem.sentence(5),
-      question_id: [1,2,3,4,5].sample
+      question_id: [2,3,4,5].sample
   )
 end
 
 13.times do
   Result.create(
-      answer_id: [1,2,3,4,5,6,7,8].sample,
+      answer_id: [3,4,5,6,7,8].sample,
       user_id: [1,2].sample
   )
 end
