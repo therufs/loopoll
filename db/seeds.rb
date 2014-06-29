@@ -37,7 +37,7 @@ end
 
 Question.create(
     content: "To Infinity or Beyond?",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 7.days,
     user_id: 1
 )
 
@@ -69,7 +69,7 @@ end
 
 Question.create(
     content: "What's your favorite color?",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 1.day,
     user_id: 1
 )
 
@@ -126,7 +126,7 @@ end
 
 Question.create(
     content: "Yes, or No?",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 10.days,
     user_id: 2
 )
 
@@ -158,7 +158,7 @@ end
 #------------------
 Question.create(
     content: "Trapezoid or Rhombus?",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 31.days,
     user_id: 2
 )
 
@@ -190,7 +190,7 @@ end
 
 Question.create(
     content: "Best game ever?",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 11.days,
     user_id: 3
 )
 
@@ -259,7 +259,7 @@ end
 
 Question.create(
     content: "Is the space between a and b:",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 1.day,
     user_id: 3
 )
 
@@ -308,7 +308,7 @@ end
 
 Question.create(
     content: "Best game ever?",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 1.day,
     user_id: 4
 )
 
@@ -365,7 +365,7 @@ end
 
 Question.create(
     content: "Is the space between a and b:",
-    duedate: DateTime.now + 1.day,
+    duedate: Date.today + 11.days,
     user_id: 5
 )
 
