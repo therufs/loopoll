@@ -29,7 +29,7 @@
               <tr>
                 <td><%= link_to question.content, question %></td>
                 <td><%= question.results.count %></td>
-                <td><%= link_to "Delete", question, method: :delete, data: { confirm: 'Are you sure you want to delete this question and its answers?' } %></td>
+                <td><%= link_to "Delete", question, method: :delete, class: "tiny button alert round", data: { confirm: 'Are you sure you want to delete this question and its answers?' } %></td>
               </tr>
             <% end %>
           </tbody>
@@ -41,14 +41,16 @@
         <table>
           <thead>
             <tr>
-              <th colspan="3">answered question</th>
+              <th>answered question</th>
+              <th>Your answer</th>
             </tr>
           </thead>
 
           <tbody>
             <% current_user.results.each do |result| %>
               <tr>
-                <td><%= result.answer.question.content %></td>
+                <td><%= link_to result.answer.question.content, result.answer.question %></td>
+                <td><%= result.answer.content %></td>
             <% end %>
           </tbody>
         </table>
@@ -77,10 +79,10 @@
         </table>
       </div>
 
-      <p>
       <%= render 'form' %>
-
-      <%= link_to 'New multiple choice question', new_question_path, class: "button secondary columns-2 large" %>
-    </p>
+      <h4>
+      Need more options? Then you can try with a:
+      <%= link_to 'new multiple choice question', new_question_path, class: "button secondary columns-2 large" %>
+    </h4>
   </div>
 </div>
