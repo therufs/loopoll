@@ -11635,3 +11635,823 @@ NoMethodError - undefined method `question' for nil:NilClass:
 
 Started POST "/__better_errors/70172238452780/variables" for 127.0.0.1 at 2014-06-28 19:06:03 -0400
   [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"   ORDER BY "questions"."duedate" ASC[0m
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateAnswers (20140627155858)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "question_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_answers_on_question_id" ON "answers" ("question_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140627155858"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateQuestions (20140627155943)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" varchar(255), "duedate" date, "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_questions_on_user_id" ON "questions" ("user_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140627155943"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateResults (20140627160015)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "results" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "answer_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_results_on_user_id" ON "results" ("user_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_results_on_answer_id" ON "results" ("answer_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140627160015"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20140627160041)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140627160041"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_answers_on_question_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_answers_on_question_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_questions_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_questions_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_answer_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_results_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_results_on_user_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-29 01:31:25.605508"], ["email", "test@test"], ["name", "Mae"], ["password_digest", "$2a$10$G01w8YXgpeph/Znd7JUzOeaoBdtCDrxa1ypq4V69FPB3SKQAJn0Pm"], ["updated_at", "2014-06-29 01:31:25.605508"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'test2@test' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-29 01:31:25.702693"], ["email", "test2@test"], ["name", "Sebastian"], ["password_digest", "$2a$10$1deO6/HSZqXJYTofg7PR6Oq1d9YMdssgKqb8.Hz1uhFXboGdchU7y"], ["updated_at", "2014-06-29 01:31:25.702693"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'rafael@hand.net' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-29 01:31:26.086401"], ["email", "rafael@hand.net"], ["name", "Abbie Predovic DDS"], ["password_digest", "$2a$10$oyPcWkcwoLWMKb3L8HjEFOKqztvowXmoNfm23VGvx41CBNg2E91e."], ["updated_at", "2014-06-29 01:31:26.086401"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'summer_leannon@gibsonnikolaus.name' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-29 01:31:26.168903"], ["email", "summer_leannon@gibsonnikolaus.name"], ["name", "Linwood Littel"], ["password_digest", "$2a$10$6ONKg9nOCRkAFKAbemdZN.7hKu5JZNH3zF1VOGllEkBcZczT2.YhO"], ["updated_at", "2014-06-29 01:31:26.168903"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'reed_sanford@hayeshane.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-29 01:31:26.263781"], ["email", "reed_sanford@hayeshane.com"], ["name", "Marjolaine Fay"], ["password_digest", "$2a$10$/qchjOogYn/ijx2y41aFferT0h0wsdducmRRRWqovpnitTJW19r/a"], ["updated_at", "2014-06-29 01:31:26.263781"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'ruben.romaguera@mertz.net' LIMIT 1[0m
+Binary data inserted for `string` type on column `password_digest`
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-06-29 01:31:26.347203"], ["email", "ruben.romaguera@mertz.net"], ["name", "Abelardo Steuber PhD"], ["password_digest", "$2a$10$eiZWdAl5uKlUHTlTLbaQD.QAdThoQJ0ZvId4yrjZmg6PVgy2gqZ5K"], ["updated_at", "2014-06-29 01:31:26.347203"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Infinity"], ["created_at", "2014-06-29 01:31:26.378120"], ["question_id", 1], ["updated_at", "2014-06-29 01:31:26.378120"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Beyond"], ["created_at", "2014-06-29 01:31:26.381687"], ["question_id", 1], ["updated_at", "2014-06-29 01:31:26.381687"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 2], ["created_at", "2014-06-29 01:31:26.390838"], ["updated_at", "2014-06-29 01:31:26.390838"], ["user_id", 2]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 2], ["created_at", "2014-06-29 01:31:26.395543"], ["updated_at", "2014-06-29 01:31:26.395543"], ["user_id", 3]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 2], ["created_at", "2014-06-29 01:31:26.398630"], ["updated_at", "2014-06-29 01:31:26.398630"], ["user_id", 4]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 2], ["created_at", "2014-06-29 01:31:26.401516"], ["updated_at", "2014-06-29 01:31:26.401516"], ["user_id", 5]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 2], ["created_at", "2014-06-29 01:31:26.404264"], ["updated_at", "2014-06-29 01:31:26.404264"], ["user_id", 6]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Indigo"], ["created_at", "2014-06-29 01:31:26.407867"], ["question_id", 2], ["updated_at", "2014-06-29 01:31:26.407867"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Chartreuse"], ["created_at", "2014-06-29 01:31:26.410031"], ["question_id", 2], ["updated_at", "2014-06-29 01:31:26.410031"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Fuchsia"], ["created_at", "2014-06-29 01:31:26.412162"], ["question_id", 2], ["updated_at", "2014-06-29 01:31:26.412162"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Rainbow"], ["created_at", "2014-06-29 01:31:26.415802"], ["question_id", 2], ["updated_at", "2014-06-29 01:31:26.415802"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 3) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 3], ["created_at", "2014-06-29 01:31:26.419037"], ["updated_at", "2014-06-29 01:31:26.419037"], ["user_id", 2]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 4) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 4], ["created_at", "2014-06-29 01:31:26.422082"], ["updated_at", "2014-06-29 01:31:26.422082"], ["user_id", 4]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 5) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 5], ["created_at", "2014-06-29 01:31:26.425647"], ["updated_at", "2014-06-29 01:31:26.425647"], ["user_id", 6]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Yes"], ["created_at", "2014-06-29 01:31:26.429294"], ["question_id", 3], ["updated_at", "2014-06-29 01:31:26.429294"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "No"], ["created_at", "2014-06-29 01:31:26.431390"], ["question_id", 3], ["updated_at", "2014-06-29 01:31:26.431390"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 7], ["created_at", "2014-06-29 01:31:26.434160"], ["updated_at", "2014-06-29 01:31:26.434160"], ["user_id", 3]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 7], ["created_at", "2014-06-29 01:31:26.436829"], ["updated_at", "2014-06-29 01:31:26.436829"], ["user_id", 4]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 7], ["created_at", "2014-06-29 01:31:26.439187"], ["updated_at", "2014-06-29 01:31:26.439187"], ["user_id", 5]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 7) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 7], ["created_at", "2014-06-29 01:31:26.441800"], ["updated_at", "2014-06-29 01:31:26.441800"], ["user_id", 6]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 8) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 8], ["created_at", "2014-06-29 01:31:26.444866"], ["updated_at", "2014-06-29 01:31:26.444866"], ["user_id", 1]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Trapezoid"], ["created_at", "2014-06-29 01:31:26.448746"], ["question_id", 4], ["updated_at", "2014-06-29 01:31:26.448746"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Rhombus"], ["created_at", "2014-06-29 01:31:26.451088"], ["question_id", 4], ["updated_at", "2014-06-29 01:31:26.451088"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 9) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 9], ["created_at", "2014-06-29 01:31:26.454754"], ["updated_at", "2014-06-29 01:31:26.454754"], ["user_id", 1]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 10) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 10], ["created_at", "2014-06-29 01:31:26.457988"], ["updated_at", "2014-06-29 01:31:26.457988"], ["user_id", 3]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 10) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 10], ["created_at", "2014-06-29 01:31:26.461033"], ["updated_at", "2014-06-29 01:31:26.461033"], ["user_id", 4]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Tetris"], ["created_at", "2014-06-29 01:31:26.464539"], ["question_id", 5], ["updated_at", "2014-06-29 01:31:26.464539"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Frogger"], ["created_at", "2014-06-29 01:31:26.466862"], ["question_id", 5], ["updated_at", "2014-06-29 01:31:26.466862"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Pitfall"], ["created_at", "2014-06-29 01:31:26.469103"], ["question_id", 5], ["updated_at", "2014-06-29 01:31:26.469103"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Q-Bert"], ["created_at", "2014-06-29 01:31:26.471152"], ["question_id", 5], ["updated_at", "2014-06-29 01:31:26.471152"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Galaga"], ["created_at", "2014-06-29 01:31:26.474272"], ["question_id", 5], ["updated_at", "2014-06-29 01:31:26.474272"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 11) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 11], ["created_at", "2014-06-29 01:31:26.477016"], ["updated_at", "2014-06-29 01:31:26.477016"], ["user_id", 4]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 11) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 11], ["created_at", "2014-06-29 01:31:26.479938"], ["updated_at", "2014-06-29 01:31:26.479938"], ["user_id", 5]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 12) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 12], ["created_at", "2014-06-29 01:31:26.482945"], ["updated_at", "2014-06-29 01:31:26.482945"], ["user_id", 6]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 13) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 13], ["created_at", "2014-06-29 01:31:26.486201"], ["updated_at", "2014-06-29 01:31:26.486201"], ["user_id", 1]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 13) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 13], ["created_at", "2014-06-29 01:31:26.489388"], ["updated_at", "2014-06-29 01:31:26.489388"], ["user_id", 2]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Nothing"], ["created_at", "2014-06-29 01:31:26.493703"], ["question_id", 6], ["updated_at", "2014-06-29 01:31:26.493703"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Something"], ["created_at", "2014-06-29 01:31:26.496937"], ["question_id", 6], ["updated_at", "2014-06-29 01:31:26.496937"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Why do you ask?"], ["created_at", "2014-06-29 01:31:26.500790"], ["question_id", 6], ["updated_at", "2014-06-29 01:31:26.500790"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 16) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 16], ["created_at", "2014-06-29 01:31:26.504775"], ["updated_at", "2014-06-29 01:31:26.504775"], ["user_id", 3]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 16) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 16], ["created_at", "2014-06-29 01:31:26.508475"], ["updated_at", "2014-06-29 01:31:26.508475"], ["user_id", 1]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 16) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 16], ["created_at", "2014-06-29 01:31:26.512306"], ["updated_at", "2014-06-29 01:31:26.512306"], ["user_id", 2]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 16) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 16], ["created_at", "2014-06-29 01:31:26.516085"], ["updated_at", "2014-06-29 01:31:26.516085"], ["user_id", 5]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 16) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 17) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 17], ["created_at", "2014-06-29 01:31:26.522865"], ["updated_at", "2014-06-29 01:31:26.522865"], ["user_id", 4]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 17) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 17], ["created_at", "2014-06-29 01:31:26.525585"], ["updated_at", "2014-06-29 01:31:26.525585"], ["user_id", 6]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 17) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 17], ["created_at", "2014-06-29 01:31:26.528894"], ["updated_at", "2014-06-29 01:31:26.528894"], ["user_id", 1]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 17) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 17], ["created_at", "2014-06-29 01:31:26.532505"], ["updated_at", "2014-06-29 01:31:26.532505"], ["user_id", 3]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 17) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 17], ["created_at", "2014-06-29 01:31:26.536234"], ["updated_at", "2014-06-29 01:31:26.536234"], ["user_id", 5]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 18], ["created_at", "2014-06-29 01:31:26.539570"], ["updated_at", "2014-06-29 01:31:26.539570"], ["user_id", 5]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 18], ["created_at", "2014-06-29 01:31:26.543309"], ["updated_at", "2014-06-29 01:31:26.543309"], ["user_id", 3]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 18], ["created_at", "2014-06-29 01:31:26.546821"], ["updated_at", "2014-06-29 01:31:26.546821"], ["user_id", 1]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 18) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 18], ["created_at", "2014-06-29 01:31:26.553738"], ["updated_at", "2014-06-29 01:31:26.553738"], ["user_id", 6]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 18) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 18) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 18) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 18], ["created_at", "2014-06-29 01:31:26.577201"], ["updated_at", "2014-06-29 01:31:26.577201"], ["user_id", 4]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 18) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 18) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 18) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Tetris"], ["created_at", "2014-06-29 01:31:26.588695"], ["question_id", 7], ["updated_at", "2014-06-29 01:31:26.588695"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Frogger"], ["created_at", "2014-06-29 01:31:26.591625"], ["question_id", 7], ["updated_at", "2014-06-29 01:31:26.591625"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Pitfall"], ["created_at", "2014-06-29 01:31:26.594111"], ["question_id", 7], ["updated_at", "2014-06-29 01:31:26.594111"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Q-Bert"], ["created_at", "2014-06-29 01:31:26.596589"], ["question_id", 7], ["updated_at", "2014-06-29 01:31:26.596589"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 19) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 19], ["created_at", "2014-06-29 01:31:26.600352"], ["updated_at", "2014-06-29 01:31:26.600352"], ["user_id", 4]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 19) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 19], ["created_at", "2014-06-29 01:31:26.603895"], ["updated_at", "2014-06-29 01:31:26.603895"], ["user_id", 5]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 19) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 19) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 19) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 20], ["created_at", "2014-06-29 01:31:26.615965"], ["updated_at", "2014-06-29 01:31:26.615965"], ["user_id", 1]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 20], ["created_at", "2014-06-29 01:31:26.618272"], ["updated_at", "2014-06-29 01:31:26.618272"], ["user_id", 6]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 20], ["created_at", "2014-06-29 01:31:26.620832"], ["updated_at", "2014-06-29 01:31:26.620832"], ["user_id", 2]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.7ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 20) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 20) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 20], ["created_at", "2014-06-29 01:31:26.632023"], ["updated_at", "2014-06-29 01:31:26.632023"], ["user_id", 3]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.2ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 20) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 20], ["created_at", "2014-06-29 01:31:26.637983"], ["updated_at", "2014-06-29 01:31:26.637983"], ["user_id", 4]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 20], ["created_at", "2014-06-29 01:31:26.640907"], ["updated_at", "2014-06-29 01:31:26.640907"], ["user_id", 5]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 20) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 20) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 20) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 21) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 21], ["created_at", "2014-06-29 01:31:26.654374"], ["updated_at", "2014-06-29 01:31:26.654374"], ["user_id", 4]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 21) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 21], ["created_at", "2014-06-29 01:31:26.656832"], ["updated_at", "2014-06-29 01:31:26.656832"], ["user_id", 2]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 21) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 21], ["created_at", "2014-06-29 01:31:26.659214"], ["updated_at", "2014-06-29 01:31:26.659214"], ["user_id", 5]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 21) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 21], ["created_at", "2014-06-29 01:31:26.661780"], ["updated_at", "2014-06-29 01:31:26.661780"], ["user_id", 1]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 21) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 22], ["created_at", "2014-06-29 01:31:26.667289"], ["updated_at", "2014-06-29 01:31:26.667289"], ["user_id", 5]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 22], ["created_at", "2014-06-29 01:31:26.670459"], ["updated_at", "2014-06-29 01:31:26.670459"], ["user_id", 3]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 22], ["created_at", "2014-06-29 01:31:26.673502"], ["updated_at", "2014-06-29 01:31:26.673502"], ["user_id", 2]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 22], ["created_at", "2014-06-29 01:31:26.676472"], ["updated_at", "2014-06-29 01:31:26.676472"], ["user_id", 4]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 22], ["created_at", "2014-06-29 01:31:26.679930"], ["updated_at", "2014-06-29 01:31:26.679930"], ["user_id", 1]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 5 AND "results"."answer_id" = 22) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 22) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["answer_id", 22], ["created_at", "2014-06-29 01:31:26.689289"], ["updated_at", "2014-06-29 01:31:26.689289"], ["user_id", 6]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 22) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 6 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 22) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mResult Exists (0.1ms)[0m  SELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 22) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 22) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Nothing"], ["created_at", "2014-06-29 01:31:26.707613"], ["question_id", 8], ["updated_at", "2014-06-29 01:31:26.707613"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["content", "Something"], ["created_at", "2014-06-29 01:31:26.709729"], ["question_id", 8], ["updated_at", "2014-06-29 01:31:26.709729"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "answers" ("content", "created_at", "question_id", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Why do you ask?"], ["created_at", "2014-06-29 01:31:26.711951"], ["question_id", 8], ["updated_at", "2014-06-29 01:31:26.711951"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 2 AND "results"."answer_id" = 23) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 23], ["created_at", "2014-06-29 01:31:26.714453"], ["updated_at", "2014-06-29 01:31:26.714453"], ["user_id", 2]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 3 AND "results"."answer_id" = 23) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 23], ["created_at", "2014-06-29 01:31:26.717274"], ["updated_at", "2014-06-29 01:31:26.717274"], ["user_id", 3]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 4 AND "results"."answer_id" = 24) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 24], ["created_at", "2014-06-29 01:31:26.719666"], ["updated_at", "2014-06-29 01:31:26.719666"], ["user_id", 4]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 25) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 25], ["created_at", "2014-06-29 01:31:26.722542"], ["updated_at", "2014-06-29 01:31:26.722542"], ["user_id", 1]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/questions" for 127.0.0.1 at 2014-06-28 21:32:07 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by QuestionsController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.7ms)[0m  [1mSELECT "questions".* FROM "questions"  WHERE "questions"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mResult Load (0.9ms)[0m  SELECT "results".* FROM "results"  WHERE "results"."user_id" = ?  [["user_id", 1]]
+  [1m[36mAnswer Load (0.6ms)[0m  [1mSELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mQuestion Load (0.5ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered questions/index.html.erb within layouts/application (50.1ms)
+[0;31;49m
+Related errors to 'undefined method `content' for nil:NilClass' on :
+[0m
+[0;34;49mforms - Rails 3.1 undefined method `content&#39; for nil:NilClass, making ...
+[0mhttp://stackoverflow.com/questions/9257977/rails-3-1-undefined-method-content-for-nilnilclass-making-twitter-style-app
+
+[0;34;49m(undefined method `content&#39; for nil:NilClass) for ... - Stack Overflow
+[0mhttp://stackoverflow.com/questions/7313523/nomethoderror-in-topicsnew-undefined-method-content-for-nilnilclass-for-ra
+
+[0;34;49mDefect #4610: undefined method `env_table&#39; for nil:NilClass ...
+[0mhttp://www.redmine.org/issues/4610
+
+[0;34;49mundefined method `content&#39; for nil:NilClass · Issue #6 · radiant ...
+[0mhttps://github.com/radiant/radiant-share-layouts-extension/issues/6
+
+[0;34;49mError &quot;undefined method `accept&#39; for nil:NilClass&quot; after upgrading to ...
+[0mhttps://github.com/rails/rails/issues/4632
+
+
+Completed 500 Internal Server Error in 491ms
+
+NoMethodError - undefined method `content' for nil:NilClass:
+  app/views/questions/index.html.erb:47:in `block in _app_views_questions_index_html_erb__3549205169168574712_70330820173340'
+  activerecord (4.1.1) lib/active_record/relation/delegation.rb:46:in `each'
+  app/views/questions/index.html.erb:45:in `_app_views_questions_index_html_erb__3549205169168574712_70330820173340'
+  actionview (4.1.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.1.1) lib/active_support/notifications.rb:161:in `instrument'
+  actionview (4.1.1) lib/action_view/template.rb:339:in `instrument'
+  actionview (4.1.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:55:in `block (2 levels) in render_template'
+  actionview (4.1.1) lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `instrument'
+  actionview (4.1.1) lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:54:in `block in render_template'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:62:in `render_with_layout'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:53:in `render_template'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:17:in `render'
+  actionview (4.1.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.1.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.1.1) lib/action_view/rendering.rb:99:in `_render_template'
+  actionpack (4.1.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.1.1) lib/action_view/rendering.rb:82:in `render_to_body'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.1.1) lib/action_controller/metal/renderers.rb:32:in `render_to_body'
+  actionpack (4.1.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+  activesupport (4.1.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (4.1.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+  activerecord (4.1.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:40:in `render'
+  actionpack (4.1.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.1.1) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.1.1) lib/abstract_controller/base.rb:189:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.1.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:113:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:86:in `run_callbacks'
+  actionpack (4.1.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `instrument'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.1.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.1.1) lib/abstract_controller/base.rb:136:in `process'
+  actionview (4.1.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.1.1) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.1.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.1.1) lib/action_controller/metal.rb:231:in `block in action'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:80:in `dispatch'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:48:in `call'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:676:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.1) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  better_errors (1.1.0) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (1.1.0) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (1.1.0) lib/better_errors/middleware.rb:56:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.0.3) lib/quiet_assets.rb:23:in `call_with_quiet_assets'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/70330797237280/variables" for 127.0.0.1 at 2014-06-28 21:32:08 -0400
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT "questions".* FROM "questions"   ORDER BY "questions"."duedate" ASC[0m
+
+
+Started GET "/questions" for 127.0.0.1 at 2014-06-28 21:32:13 -0400
+Processing by QuestionsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT "questions".* FROM "questions"  WHERE "questions"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mResult Load (0.1ms)[0m  SELECT "results".* FROM "results"  WHERE "results"."user_id" = ?  [["user_id", 1]]
+  [1m[36mAnswer Load (0.1ms)[0m  [1mSELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mQuestion Load (0.1ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered questions/index.html.erb within layouts/application (6.0ms)
+[0;31;49m
+Related errors to 'undefined method `content' for nil:NilClass' on :
+[0m
+[0;34;49mforms - Rails 3.1 undefined method `content&#39; for nil:NilClass, making ...
+[0mhttp://stackoverflow.com/questions/9257977/rails-3-1-undefined-method-content-for-nilnilclass-making-twitter-style-app
+
+[0;34;49m(undefined method `content&#39; for nil:NilClass) for ... - Stack Overflow
+[0mhttp://stackoverflow.com/questions/7313523/nomethoderror-in-topicsnew-undefined-method-content-for-nilnilclass-for-ra
+
+[0;34;49mDefect #4610: undefined method `env_table&#39; for nil:NilClass ...
+[0mhttp://www.redmine.org/issues/4610
+
+[0;34;49mundefined method `content&#39; for nil:NilClass · Issue #6 · radiant ...
+[0mhttps://github.com/radiant/radiant-share-layouts-extension/issues/6
+
+[0;34;49mError &quot;undefined method `accept&#39; for nil:NilClass&quot; after upgrading to ...
+[0mhttps://github.com/rails/rails/issues/4632
+
+
+Completed 500 Internal Server Error in 225ms
+
+NoMethodError - undefined method `content' for nil:NilClass:
+  app/views/questions/index.html.erb:47:in `block in _app_views_questions_index_html_erb__3549205169168574712_70330820173340'
+  activerecord (4.1.1) lib/active_record/relation/delegation.rb:46:in `each'
+  app/views/questions/index.html.erb:45:in `_app_views_questions_index_html_erb__3549205169168574712_70330820173340'
+  actionview (4.1.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.1.1) lib/active_support/notifications.rb:161:in `instrument'
+  actionview (4.1.1) lib/action_view/template.rb:339:in `instrument'
+  actionview (4.1.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:55:in `block (2 levels) in render_template'
+  actionview (4.1.1) lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `instrument'
+  actionview (4.1.1) lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:54:in `block in render_template'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:62:in `render_with_layout'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:53:in `render_template'
+  actionview (4.1.1) lib/action_view/renderer/template_renderer.rb:17:in `render'
+  actionview (4.1.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.1.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.1.1) lib/action_view/rendering.rb:99:in `_render_template'
+  actionpack (4.1.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.1.1) lib/action_view/rendering.rb:82:in `render_to_body'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.1.1) lib/action_controller/metal/renderers.rb:32:in `render_to_body'
+  actionpack (4.1.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+  activesupport (4.1.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (4.1.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+  activerecord (4.1.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:40:in `render'
+  actionpack (4.1.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.1.1) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.1.1) lib/abstract_controller/base.rb:189:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.1.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:113:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:86:in `run_callbacks'
+  actionpack (4.1.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `instrument'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.1.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.1.1) lib/abstract_controller/base.rb:136:in `process'
+  actionview (4.1.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.1.1) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.1.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.1.1) lib/action_controller/metal.rb:231:in `block in action'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:80:in `dispatch'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:48:in `call'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:676:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.1) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  better_errors (1.1.0) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (1.1.0) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (1.1.0) lib/better_errors/middleware.rb:56:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.0.3) lib/quiet_assets.rb:23:in `call_with_quiet_assets'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/maebeale/.rbenv/versions/2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/70330822099220/variables" for 127.0.0.1 at 2014-06-28 21:32:13 -0400
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT "questions".* FROM "questions"   ORDER BY "questions"."duedate" ASC[0m
+
+
+Started POST "/__better_errors/70330822099220/eval" for 127.0.0.1 at 2014-06-28 21:32:21 -0400
+
+
+Started POST "/__better_errors/70330822099220/eval" for 127.0.0.1 at 2014-06-28 21:32:25 -0400
+
+
+Started POST "/__better_errors/70330822099220/eval" for 127.0.0.1 at 2014-06-28 21:32:34 -0400
