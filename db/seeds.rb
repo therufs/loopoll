@@ -65,11 +65,10 @@ Answer.create(
   )
 end
 
-#------------------
 
 Question.create(
-    content: "What's your favorite color?",
-    duedate: Date.today + 1.day,
+    content: "Wat's your favorite color?",
+    duedate: Date.today + 5.days,
     user_id: 1
 )
 
@@ -120,10 +119,8 @@ end
 #       user_id: i + 6
 #   )
 # end
-
-
-#------------------
-
+#
+#
 Question.create(
     content: "Yes, or No?",
     duedate: Date.today + 10.days,
@@ -154,8 +151,6 @@ end
   )
 end
 
-
-#------------------
 Question.create(
     content: "Trapezoid or Rhombus?",
     duedate: Date.today + 31.days,
@@ -185,8 +180,6 @@ end
       user_id: i + 3
   )
 end
-
-#-------------------
 
 Question.create(
     content: "Best game ever?",
@@ -254,12 +247,10 @@ end
 #   )
 # end
 
-#------------------
-
 
 Question.create(
     content: "Is the space between a and b:",
-    duedate: Date.today + 1.day,
+    duedate: Date.today + 9.days,
     user_id: 3
 )
 
@@ -299,88 +290,78 @@ end
   )
 end
 
-
-
-
-#-------------------
-#-------------------------------
-#-------------------------------
-
 Question.create(
-    content: "Best game ever?",
-    duedate: Date.today + 1.day,
+    content: "Favorite time of day?",
+    duedate: Date.today + 3.days,
     user_id: 4
 )
 
 Answer.create(
-    content: "Tetris",
+    content: "Morning",
     question_id: 7
 )
 
 Answer.create(
-    content: "Frogger",
+    content: "Noon",
     question_id: 7
 )
 
 Answer.create(
-    content: "Pitfall",
+    content: "Night",
     question_id: 7
 )
 
 Answer.create(
-    content: "Q-Bert",
+    content: "Late night",
     question_id: 7
 )
 
-5.times do |i|
+3.times do |i|
   Result.create(
       answer_id: 19,
-      user_id: [1, 2, 3, 4, 5, 6].sample
+      user_id: i + 1
   )
 end
 
-15.times do |i|
+1.times do |i|
   Result.create(
       answer_id: 20,
-      user_id: [1, 2, 3, 4, 5, 6].sample
+      user_id: i + 1
   )
 end
 
-5.times do |i|
+2.times do |i|
   Result.create(
       answer_id: 21,
-      user_id: [1, 2, 3, 4, 5, 6].sample
+      user_id: i + 2
   )
 end
 
-15.times do |i|
-  Result.create(
-      answer_id: 22,
-      user_id: [1, 2, 3, 4, 5, 6].sample
-  )
-end
-
-#------------------
-
+# 1.times do |i|
+#   Result.create(
+#       answer_id: 22,
+#       user_id: [1, 2, 3, 4, 5, 6].sample
+#   )
+# end
 
 Question.create(
-    content: "Is the space between a and b:",
-    duedate: Date.today + 11.days,
+    content: "Beatles knock knock",
+    duedate: Date.today + 1.days,
     user_id: 5
 )
 
 Answer.create(
-    content: "Nothing",
+    content: "Hello",
     question_id: 8
 )
 
 Answer.create(
-    content: "Something",
+    content: "Goodbye",
     question_id: 8
 )
 
 Answer.create(
-    content: "Why do you ask?",
+    content: "Hello you say goodbye, I say hello-O-o.",
     question_id: 8
 )
 

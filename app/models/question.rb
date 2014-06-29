@@ -10,7 +10,7 @@ class Question < ActiveRecord::Base
     reject_if: lambda { |answer| answer['content'].blank? }
 
   def future_due_date #TODO: test for this validation
-    if duedate < DateTime.now
+    if duedate < Date.today
       errors.add(:duedate, ", poll must end in the future.")
     end
   end
