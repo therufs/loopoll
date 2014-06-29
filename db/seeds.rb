@@ -8,100 +8,399 @@
 
 
 User.create(
-      name: "test",
-      email: "test@test",
-      password: "test",
-      password_confirmation: "test"
+    name: "Mae",
+    email: "test@test",
+    password: "test",
+    password_confirmation: "test"
 )
 
 User.create(
-      name: "test2",
-      email: "test2@test",
-      password: "test",
-      password_confirmation: "test"
+    name: "Sebastian",
+    email: "test2@test",
+    password: "test",
+    password_confirmation: "test"
 )
 
 4.times do
-User.create(
+  User.create(
       name: Faker::Name.name,
       email: Faker::Internet.email,
       password: "1234",
       password_confirmation: "1234"
-)
+  )
 end
 
 @dates = ['2015-06-23','2015-12-12','2015-06-24','2015-01-01']
 
 
+#------------------
+
 Question.create(
-  content: "Test for Yes/No results",
-  duedate: DateTime.now + 1.day,
-  user_id: 1
+    content: "To Infinity or Beyond?",
+    duedate: DateTime.now + 1.day,
+    user_id: 1
 )
 
 Answer.create(
-  content: "Yes",
-  question_id: 1
+    content: "Infinity",
+    question_id: 1
 )
 
 Answer.create(
-  content: "No",
-  question_id: 1
+    content: "Beyond",
+    question_id: 1
 )
 
-5.times do
+# 2.times do |i|
+#   Result.create(
+#       answer_id: 1,
+#       user_id: i + 1
+#   )
+# end
+
+5.times do |i|
   Result.create(
-  answer_id: 1,
-  user_id: [1, 2, 3, 4, 5, 6].sample
+      answer_id: 2,
+      user_id: i + 2
   )
 end
 
-15.times do
+#------------------
+
+Question.create(
+    content: "What's your favorite color?",
+    duedate: DateTime.now + 1.day,
+    user_id: 1
+)
+
+Answer.create(
+    content: "Indigo",
+    question_id: 2
+)
+
+Answer.create(
+    content: "Chartreuse",
+    question_id: 2
+)
+
+Answer.create(
+    content: "Fuchsia",
+    question_id: 2
+)
+
+Answer.create(
+    content: "Rainbow",
+    question_id: 2
+)
+
+1.times do |i|
   Result.create(
-  answer_id: 2,
-  user_id: [1, 2, 3, 4, 5, 6].sample
+      answer_id: 3,
+      user_id: i + 2
   )
 end
 
+1.times do |i|
+  Result.create(
+      answer_id: 4,
+      user_id: i + 4
+  )
+end
+
+1.times do |i|
+  Result.create(
+      answer_id: 5,
+      user_id: i + 6
+  )
+end
+
+# 1.times do |i|
+#   Result.create(
+#       answer_id: 6,
+#       user_id: i + 6
+#   )
+# end
 
 
-2.times do
-  Question.create(
-      content: Faker::Lorem.sentence(2),
-      duedate: @dates.sample,
+#------------------
+
+Question.create(
+    content: "Yes, or No?",
+    duedate: DateTime.now + 1.day,
+    user_id: 2
+)
+
+Answer.create(
+    content: "Yes",
+    question_id: 3
+)
+
+Answer.create(
+    content: "No",
+    question_id: 3
+)
+
+4.times do |i|
+  Result.create(
+      answer_id: 7,
+      user_id: i + 3
+  )
+end
+
+1.times do |i|
+  Result.create(
+      answer_id: 8,
       user_id: 1
-)
-end
-
-3.times do
-  Question.create(
-      content: Faker::Lorem.sentence(2),
-      duedate: @dates.sample,
-      user_id: 2
-)
-end
-
-2.times do
-  Answer.create(
-      content: Faker::Lorem.sentence(5),
-      question_id: 2
-)
-end
-
-4.times do
-  4.times do |i|
-    Answer.create(
-      content: Faker::Lorem.sentence(5),
-      question_id: i + 3
   )
-  end
 end
 
-6.times do |j|
-  16.times do |i|
-    Result.create(
-      answer_id: (i * 4) + 5,
-      user_id: j + 1
+
+#------------------
+Question.create(
+    content: "Trapezoid or Rhombus?",
+    duedate: DateTime.now + 1.day,
+    user_id: 2
+)
+
+Answer.create(
+    content: "Trapezoid",
+    question_id: 4
+)
+
+Answer.create(
+    content: "Rhombus",
+    question_id: 4
+)
+
+1.times do |i|
+  Result.create(
+      answer_id: 9,
+      user_id: 1
   )
-  end  
+end
+
+2.times do |i|
+  Result.create(
+      answer_id: 10,
+      user_id: i + 3
+  )
+end
+
+#-------------------
+
+Question.create(
+    content: "Best game ever?",
+    duedate: DateTime.now + 1.day,
+    user_id: 3
+)
+
+Answer.create(
+    content: "Tetris",
+    question_id: 5
+)
+
+Answer.create(
+    content: "Frogger",
+    question_id: 5
+)
+
+Answer.create(
+    content: "Pitfall",
+    question_id: 5
+)
+
+Answer.create(
+    content: "Q-Bert",
+    question_id: 5
+)
+
+Answer.create(
+    content: "Galaga",
+    question_id: 5
+)
+
+2.times do |i|
+  Result.create(
+      answer_id: 11,
+      user_id: i + 4
+  )
+end
+
+1.times do |i|
+  Result.create(
+      answer_id: 12,
+      user_id: i + 6
+  )
+end
+
+2.times do |i|
+  Result.create(
+      answer_id: 13,
+      user_id: i + 1
+  )
+end
+
+# 1.times do |i|
+#   Result.create(
+#       answer_id: 14,
+#       user_id: [1, 2, 3, 4, 5, 6].sample
+#   )
+# end
+#
+# 1.times do |i|
+#   Result.create(
+#       answer_id: 15,
+#       user_id: [1, 2, 3, 4, 5, 6].sample
+#   )
+# end
+
+#------------------
+
+
+Question.create(
+    content: "Is the space between a and b:",
+    duedate: DateTime.now + 1.day,
+    user_id: 3
+)
+
+Answer.create(
+    content: "Nothing",
+    question_id: 6
+)
+
+Answer.create(
+    content: "Something",
+    question_id: 6
+)
+
+Answer.create(
+    content: "Why do you ask?",
+    question_id: 6
+)
+
+5.times do |i|
+  Result.create(
+      answer_id: 16,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+5.times do |i|
+  Result.create(
+      answer_id: 17,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+15.times do |i|
+  Result.create(
+      answer_id: 18,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+
+
+
+#-------------------
+#-------------------------------
+#-------------------------------
+
+Question.create(
+    content: "Best game ever?",
+    duedate: DateTime.now + 1.day,
+    user_id: 4
+)
+
+Answer.create(
+    content: "Tetris",
+    question_id: 7
+)
+
+Answer.create(
+    content: "Frogger",
+    question_id: 7
+)
+
+Answer.create(
+    content: "Pitfall",
+    question_id: 7
+)
+
+Answer.create(
+    content: "Q-Bert",
+    question_id: 7
+)
+
+5.times do |i|
+  Result.create(
+      answer_id: 19,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+15.times do |i|
+  Result.create(
+      answer_id: 20,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+5.times do |i|
+  Result.create(
+      answer_id: 21,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+15.times do |i|
+  Result.create(
+      answer_id: 22,
+      user_id: [1, 2, 3, 4, 5, 6].sample
+  )
+end
+
+#------------------
+
+
+Question.create(
+    content: "Is the space between a and b:",
+    duedate: DateTime.now + 1.day,
+    user_id: 5
+)
+
+Answer.create(
+    content: "Nothing",
+    question_id: 8
+)
+
+Answer.create(
+    content: "Something",
+    question_id: 8
+)
+
+Answer.create(
+    content: "Why do you ask?",
+    question_id: 8
+)
+
+2.times do |i|
+  Result.create(
+      answer_id: 23,
+      user_id: i + 2
+  )
+end
+
+1.times do |i|
+  Result.create(
+      answer_id: 24,
+      user_id: i + 4
+  )
+end
+
+1.times do |i|
+  Result.create(
+      answer_id: 25,
+      user_id: i + 1
+  )
 end
