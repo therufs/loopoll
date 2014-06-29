@@ -18975,3 +18975,107 @@ Binary data inserted for `string` type on column `password_digest`
   [1m[36mResult Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "results"  WHERE ("results"."user_id" = 1 AND "results"."answer_id" = 25) LIMIT 1[0m
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "results" ("answer_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["answer_id", 25], ["created_at", "2014-06-29 02:58:48.420424"], ["updated_at", "2014-06-29 02:58:48.420424"], ["user_id", 1]]
   [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2014-06-29 11:05:08 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form2.html.erb (638.7ms)
+  Rendered questions/new.html.erb within layouts/application (643.6ms)
+Completed 200 OK in 1068ms (Views: 937.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2014-06-29 11:05:24 -0400
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form2.html.erb (7.5ms)
+  Rendered questions/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 27ms (Views: 25.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2014-06-29 11:06:35 -0400
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form2.html.erb (6.9ms)
+  Rendered questions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2014-06-29 11:06:38 -0400
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form2.html.erb (6.7ms)
+  Rendered questions/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 25ms (Views: 22.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2014-06-29 11:09:30 -0400
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form2.html.erb (5.2ms)
+  Rendered questions/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 26ms (Views: 24.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/questions/new" for 127.0.0.1 at 2014-06-29 11:09:32 -0400
+Processing by QuestionsController#new as HTML
+  Rendered questions/_form2.html.erb (6.4ms)
+  Rendered questions/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 26ms (Views: 24.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/questions/2" for 127.0.0.1 at 2014-06-29 11:09:39 -0400
+Processing by QuestionsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) AS count_all, answer_id AS answer_id FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? GROUP BY answer_id[0m  [["question_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "answers"  WHERE "answers"."question_id" = ?  [["question_id", 2]]
+  Rendered questions/show.html.erb within layouts/application (145.6ms)
+Completed 200 OK in 174ms (Views: 163.4ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/questions" for 127.0.0.1 at 2014-06-29 11:09:43 -0400
+Processing by QuestionsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.3ms)[0m  SELECT "questions".* FROM "questions"  WHERE "questions"."user_id" = ?  [["user_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ?  [["question_id", 2]]
+  [1m[36mResult Load (0.3ms)[0m  [1mSELECT "results".* FROM "results"  WHERE "results"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 9]]
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mAnswer Load (0.2ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 13]]
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mAnswer Load (0.4ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 18]]
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 19]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 20]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mAnswer Load (0.1ms)[0m  SELECT  "answers".* FROM "answers"  WHERE "answers"."id" = ? LIMIT 1  [["id", 25]]
+  [1m[36mQuestion Load (0.1ms)[0m  [1mSELECT  "questions".* FROM "questions"  WHERE "questions"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions"   ORDER BY "questions"."duedate" ASC
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 8]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 7]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 6]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 5]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "results" INNER JOIN "answers" ON "results"."answer_id" = "answers"."id" WHERE "answers"."question_id" = ? AND "results"."user_id" = 1  [["question_id", 4]]
+  Rendered questions/_form.html.erb (49.7ms)
+  Rendered questions/index.html.erb within layouts/application (121.4ms)
+Completed 200 OK in 140ms (Views: 133.2ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-06-29 11:09:49 -0400
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 23ms (Views: 21.7ms | ActiveRecord: 0.0ms)
