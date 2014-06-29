@@ -15,6 +15,10 @@ class Question < ActiveRecord::Base
     end
   end
 
+  def self.valid
+    where("duedate > ?", Date.today)
+  end
+
   def created
     where(user_id: session[:user_id])
   end

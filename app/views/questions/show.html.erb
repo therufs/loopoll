@@ -5,7 +5,7 @@
     <h2><%= @question.content %></h2>
   </div>
 </div>
-
+<%= binding.pry %>
 <% if @question.answered?(current_user) || @question.user == current_user || @question.duedate < Date.today   %>
 
   <div class="row">
@@ -18,7 +18,7 @@
     </div>
 
 
-  <%= card(@question.answers.count, 'ANSWERS RECEIVED', 'right') %>
+  <%= card(@question.answer.count, 'ANSWERS RECEIVED', 'right') %>
   <%= card(@question.days_left, 'DAYS TO END', 'right') %>
   <%= card('Yes', 'WINNING ANSWER', 'right') %>   <!-- FIXME:put the right answer -->
   </div>
@@ -52,7 +52,7 @@
   <div class="row">
     <ul class="button-group large-6 columns large-centered">
       <li><%= link_to 'All questions', questions_path, class: "button secondary" %></li>
-      <li ><%= link_to 'Next question to answer', questions_path, class: "button success"%></li>
+      <li ><%= link_to 'Next question to answer', questions_path, class: "button success"%></li> <!--TODO: choose the next question -->
     </ul></div>
   </div>
 </p>
