@@ -1,78 +1,86 @@
-<h1>Listing questions</h1>
+<div class="container">
+  <div class="row">
+    <h1>Listing questions</h1>
+    <div class="large-4 columns">
 
-<!-- Latest questions created by the current_user, left at top -->
-<!-- link to all questions created -->
+      <!-- Latest questions created by the current_user, left at top -->
+      <!-- link to all questions created -->
 
-<!-- Latest questions answered by current_user, left bottom -->
-<!-- link to all questions answered -->
+      <!-- Latest questions answered by current_user, left bottom -->
+      <!-- link to all questions answered -->
 
-<!-- Questions to answer ordered by due date, right -->
-<!-- link to all question to answer (maybe using pagination)-->
+      <!-- Questions to answer ordered by due date, right -->
+      <!-- link to all question to answer (maybe using pagination)-->
 
-<!-- field to create a new Yes/No question or a button for a Multiple Choice one -->
+      <!-- field to create a new Yes/No question or a button for a Multiple Choice one -->
 
-<div class="large-5 columns left">
-  <table>
-    <thead>
-      <tr>
-        <th>created question</th>
-        <th>answers received</th>
-        <th></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% current_user.questions.each do |question| %>
-        <tr>
-          <td><%= link_to question.content, question %></td>
-          <td><%= question.results.count %></td>
-          <td><%= link_to "Delete", question, method: :delete, data: { confirm: 'Are you sure you want to delete this question and its answers?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <table>
+          <thead>
+            <tr>
+              <th>created question</th>
+              <th>answers received</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% current_user.questions.each do |question| %>
+              <tr>
+                <td><%= link_to question.content, question %></td>
+                <td><%= question.results.count %></td>
+                <td><%= link_to "Delete", question, method: :delete, data: { confirm: 'Are you sure you want to delete this question and its answers?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="large-4 columns">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="3">answered question</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% current_user.results.each do |result| %>
+              <tr>
+                <td><%= result.answer.question.content %></td>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="columns-4 large">
+        <table>
+          <thead>
+            <tr>
+              <th>Questions to answer</th>
+              <th>Question creator</th>
+              <th>Days left to answer</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @questions.each do |question| %>
+              <tr>
+                <% unless question.user == current_user || question.answered?(current_user) || question.duedate < Date.today %>
+                  <td><%= link_to question.content, question %></td>
+                  <td><%= question.user.name %></td>
+                  <td><%= pluralize(question.days_left, "day") %></td>
+                <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+      <%= render 'form' %>
+
+      <%= link_to 'New multiple choice question', new_question_path, class: "button secondary columns-2 large" %>
+    </p>
+  </div>
 </div>
-
-<div class="large-5 columns left">
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3">answered question</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% current_user.results.each do |result| %>
-        <tr>
-          <td><%= result.answer.question.content %></td>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<div class="columns-5 large right">
-  <table>
-    <thead>
-      <tr>
-        <th>Questions to answer</th>
-        <th>Question creator</th>
-        <th>Days left to answer</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @questions.each do |question| %>
-        <tr>
-          <% unless question.user == current_user || question.answered?(current_user) || question.duedate < Date.today %>
-            <td><%= link_to question.content, question %></td>
-            <td><%= question.user.name %></td>
-            <td><%= pluralize(question.days_left, "day") %></td>
-          <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<%= render 'form' %>
-
-<%= link_to 'New multiple choice question', new_question_path %>

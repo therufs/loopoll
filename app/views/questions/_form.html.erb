@@ -1,38 +1,39 @@
-<%= form_for(@question) do |f| %>
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+<div class="row">
+  <%= form_for(@question) do |f| %>
+    <% if @question.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-      <ul>
-      <% @question.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <ul>
+        <% @question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field large-6 columns">
+       <%= f.label :content %><br>
+       <%= f.text_field :content %>
+    </div>
+
+    <div class="field large-2 columns">
+       <%= f.label :duedate %><br>
+       <%= f.date_select :duedate, default: Date.tomorrow  %>
+    </div>
+
+    <div>
+      <%= f.fields_for :answers do |ff| %>
+        <%= ff.hidden_field :content, value: "Yes" %>
       <% end %>
-      </ul>
+    </div>
+
+    <%= f.fields_for :answers do |ff| %>
+      <% ff.hidden_field :content, value: "No" %>
+    <% end %>
+
+    <div class='button regular large-2 columns'>
+      <%= f.submit "Create question (with Yes/No Answers)"%>
     </div>
   <% end %>
-
-  <div class="field">
-     <%= f.label :content %><br>
-     <%= f.text_field :content %>
-  </div>
-
-  <div class="field">
-     <%= f.label :duedate %><br>
-     <%= f.date_select :duedate, default: Date.tomorrow  %>
-  </div>
-
-  <div>
-    <%= f.fields_for :answers do |ff| %>
-
-      <%= ff.hidden_field :content, value: "Yes" %>
-    <% end %>
-  </div>
-
-  <%= f.fields_for :answers do |ff| %>
-    <% ff.hidden_field :content, value: "No" %>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
