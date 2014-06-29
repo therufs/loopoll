@@ -36,7 +36,7 @@ end
 Question.create(
   content: "Test for Yes/No results",
   duedate: DateTime.now + 1.day,
-  user_id: 2
+  user_id: 1
 )
 
 Answer.create(
@@ -81,24 +81,27 @@ end
 )
 end
 
-8.times do
+2.times do
   Answer.create(
-      content: Faker::Lorem.sentence(5)
-      question_id:
-
-  )
+      content: Faker::Lorem.sentence(5),
+      question_id: 2
+)
 end
 
-3.times do
-  Result.create(
-      answer_id: [3,4,5,6,7,8].sample,
-      user_id: [1,2].sample
+4.times do
+  4.times do |i|
+    Answer.create(
+      content: Faker::Lorem.sentence(5),
+      question_id: i + 3
   )
+  end
 end
 
-8.times do
-  Result.create(
-      answer_id: [3,4,5,6,7,8].sample,
-      user_id: [3,4,5,6].sample
+6.times do |j|
+  16.times do |i|
+    Result.create(
+      answer_id: (i * 4) + 5,
+      user_id: j + 1
   )
+  end  
 end
