@@ -38,4 +38,8 @@ class Question < ActiveRecord::Base
   def days_left
     (duedate - Date.today).to_i
   end
+
+  def result_data
+    results.includes(:answer).group(:answer).count
+  end
 end
