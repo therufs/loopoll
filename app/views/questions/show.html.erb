@@ -19,7 +19,7 @@
 
   <%= card(@question.results.count, 'ANSWERS RECEIVED', 'right') %>
   <%= card(@question.days_left, 'DAYS TO END', 'right') %>
-  <%= card('Yes', 'WINNING ANSWER', 'right') %>   <!-- FIXME:put the right answer -->
+  <%= card(((@question.results.max {|m| m.answer_id}).answer_id), 'WINNING ANSWER', 'right') %>   <!-- FIXME:put the right answer -->
   </div>
 
 
