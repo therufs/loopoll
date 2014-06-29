@@ -5,7 +5,6 @@
     <h2><%= @question.content %></h2>
   </div>
 </div>
-<%= binding.pry %>
 <% if @question.answered?(current_user) || @question.user == current_user || @question.duedate < Date.today   %>
 
   <div class="row">
@@ -18,7 +17,7 @@
     </div>
 
 
-  <%= card(@question.answer.count, 'ANSWERS RECEIVED', 'right') %>
+  <%= card(@question.results.count, 'ANSWERS RECEIVED', 'right') %>
   <%= card(@question.days_left, 'DAYS TO END', 'right') %>
   <%= card('Yes', 'WINNING ANSWER', 'right') %>   <!-- FIXME:put the right answer -->
   </div>

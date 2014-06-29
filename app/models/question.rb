@@ -15,14 +15,18 @@ class Question < ActiveRecord::Base
     end
   end
 
-  def self.valid
-    where("duedate > ?", Date.today)
+  def valid?
+    duedate > Date.today
   end
 
-  def created
-    where(user_id: session[:user_id])
+  def invalid?
+    !valid
   end
 
+  def owner(user)
+    user_id == user.id
+  end
+  
   def answered(user)
     results.where(user_id: user.id)
   end
