@@ -17,12 +17,12 @@ class Question < ActiveRecord::Base
     end
   end
 
-  def valid?
+  def active
     duedate > Date.today
   end
 
-  def invalid?
-    !valid
+  def inactive?
+    !active
   end
 
   def owner(user)
