@@ -27,7 +27,12 @@ class QuestionTest < ActiveSupport::TestCase
 
 
   test "owner is user" do
-      user = User.new
+      user = User.create(
+        name:"test",
+        email:"test@test",
+        password: "test",
+        password_confirmation: "test"
+      )
       q1 = Question.create(
           content: "test",
           duedate: DateTime.now + 2.days,
@@ -37,8 +42,18 @@ class QuestionTest < ActiveSupport::TestCase
     end
 
     test "user can't answer a question twice" do
-      user1 = User.new
-      user2 = User.new
+      user1 = User.create(
+          name:"test",
+          email:"test@test",
+          password: "test",
+          password_confirmation: "test"
+      )
+      user2 = User.create(
+          name:"test",
+          email:"test@test",
+          password: "test",
+          password_confirmation: "test"
+      )
       q1 = Question.create(
           content: "test",
           duedate: DateTime.now + 2.days,
@@ -69,8 +84,18 @@ class QuestionTest < ActiveSupport::TestCase
     end
 
     test "questions to answer are not owned by user" do
-      user1 = User.new
-      user2 = User.new
+      user1 = User.create(
+          name:"test",
+          email:"test@test",
+          password: "test",
+          password_confirmation: "test"
+      )
+      user2 = User.create(
+          name:"test",
+          email:"test@test",
+          password: "test",
+          password_confirmation: "test"
+      )
       q1 = Question.create(
           content: "test",
           duedate: DateTime.now + 2.days,
@@ -87,9 +112,15 @@ class QuestionTest < ActiveSupport::TestCase
 
       assert q1.user_id != user_id
       #not sure how to change to entirely to prove unanswered doesn't contain self
+    end
 
     test "questions are multiple choice if > 2 answers" do
-      user1 = User.new
+      user1 = User.create(
+          name:"test",
+          email:"test@test",
+          password: "test",
+          password_confirmation: "test"
+      )
       q1 = Question.create(
           content: "test",
           duedate: DateTime.now + 2.days,

@@ -1,5 +1,5 @@
 class Result < ActiveRecord::Base
-  validate :uniqueness_of_result
+  validates_uniqueness_of :user_id, scope: :answer_id
   belongs_to :user
   belongs_to :answer
 
