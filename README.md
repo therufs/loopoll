@@ -38,10 +38,10 @@ Sign up (or log in if you already have an account) via http://0:0:0:0!
         you won`t be able to return to the voting page again. 
         Questions with two answers will display as a bar chart, else pie chart. (All questions must have two answers.)>
 
-###Known bugs:
+###Known bug(s):
 - Display page for each question shows the top answer incorrectly. 
 This was an extra feature we added, but one we'd like to see functioning.
-- Login validation is preventing question creation.
+- Need to create more tests and move some logic out of the views and into custom methods.
 
 ##Original Specs:
 
