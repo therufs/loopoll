@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   validate :future_due_date
   #TODO: validate that a question has at least 2 answers
 
+  ##for the above, should we just add answers.count >= 2 as 2nd line in valid method below?
+
   belongs_to :user
   has_many :answers, dependent: :destroy
   has_many :results, through: :answers

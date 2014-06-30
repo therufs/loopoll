@@ -14,6 +14,7 @@ class QuestionsController < ApplicationController
   def show
     @result = Result.new
     @results = @question.results
+    @answers = @question.answers
   end
 
   # GET /questions/new
