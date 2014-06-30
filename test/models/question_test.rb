@@ -38,7 +38,7 @@ class QuestionTest < ActiveSupport::TestCase
           duedate: DateTime.now + 2.days,
           user_id: 1
       )
-     assert_equal 1, user.id
+     assert_equal 1, q1.user_id # was user.id -- didn't seem like what you meant
     end
 
     test "user can't answer a question twice" do
@@ -68,18 +68,21 @@ class QuestionTest < ActiveSupport::TestCase
           content: "test"
       )
       result1 = Result.create(
-          user_id: 1,
+          user_id: user1.id,  ## changed these from 1 to user1.id
           answer_id: 1
       )
       result2 = Result.create(
-          user_id: 1,
+          user_id: user1.id,
           answer_id: 1
       )
       result3 = Result.create(
-          user_id: 1,
+          user_id: user1.id,
           answer_id: 1
       )
-      assert Results.user_id.find(1).count <= 1
+      binding.pry
+      assert Result.where(id: user1.id).size <= 1
+      ## find_by methods return a single bare record, so the 
+      ## results don't have methods like .count and .size
 
     end
 
@@ -99,18 +102,21 @@ class QuestionTest < ActiveSupport::TestCase
       q1 = Question.create(
           content: "test",
           duedate: DateTime.now + 2.days,
-          user_id: 1
+          user_id: user1.id
       )
       answer = Answer.create(
           question_id: 1,
           content: "test"
       )
       result1 = Result.create(
-          user_id: 2,
+          user_id: user2.id,
           answer_id: 1
       )
 
-      assert q1.user_id != user_id
+      ## Don't know if I actually improved this; not sure it tests what you want?
+      ## not v familiar with how your models are structured, sorry
+      assert q1.user_id != result1.user_id
+
       #not sure how to change to entirely to prove unanswered doesn't contain self
     end
 
@@ -128,7 +134,7 @@ class QuestionTest < ActiveSupport::TestCase
       )
       3.times do
         answer = Answer.create(
-          question_id: 1,
+          question_id: q1.id,
           content: "test"
       )
       end
@@ -139,7 +145,7 @@ class QuestionTest < ActiveSupport::TestCase
       )
       4.times do
         answer = Answer.create(
-            question_id: 2,
+            question_id: q2.id,
             content: "test"
         )
         end
@@ -150,7 +156,7 @@ class QuestionTest < ActiveSupport::TestCase
       )
       2.times do
         answer = Answer.create(
-          question_id: 3,
+          question_id: q3.id,
           content: "test"
       )
       end
@@ -160,17 +166,21 @@ class QuestionTest < ActiveSupport::TestCase
           user_id: 1
       )
         answer = Answer.create(
-            question_id: 4,
+            question_id: q4.id,
             content: "yes"
         )
         answer = Answer.create(
             question_id: 4,
             content: "no"
         )
+#        binding.pry
 
+
+      ## These are failing because for some reason their IDs are giant numbers like 980190963.
       assert q1.answers.count > 2 && q2.answers.count > 2
       refute q3.answers.count > 2 && q4.answers.count > 2
     end
+
 
 
 
