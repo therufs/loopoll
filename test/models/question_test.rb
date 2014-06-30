@@ -35,10 +35,10 @@ class QuestionTest < ActiveSupport::TestCase
       )
       q1 = Question.create(
           content: "test",
-          duedate: DateTime.now + 2.days,
+          duedate: Date.today + 2.days,
           user_id: 1
       )
-     assert_equal 1, user.id
+     assert_equal 1, q1.user_id
     end
 
     test "user can't answer a question twice" do
@@ -99,18 +99,18 @@ class QuestionTest < ActiveSupport::TestCase
       q1 = Question.create(
           content: "test",
           duedate: DateTime.now + 2.days,
-          user_id: 1
+          user_id: user1.id
       )
       answer = Answer.create(
-          question_id: 1,
+          question_id: q1.id,
           content: "test"
       )
       result1 = Result.create(
-          user_id: 2,
-          answer_id: 1
+          user_id: user2.id,
+          answer_id: answer.id
       )
 
-      assert q1.user_id != user_id
+      assert q1.id != user_id
       #not sure how to change to entirely to prove unanswered doesn't contain self
     end
 
@@ -123,53 +123,55 @@ class QuestionTest < ActiveSupport::TestCase
       )
       q1 = Question.create(
           content: "test",
-          duedate: DateTime.now + 2.days,
+          duedate: Date.today + 2.days,
           user_id: 1
       )
       3.times do
         answer = Answer.create(
-          question_id: 1,
+          question_id: q1.id,
           content: "test"
       )
       end
       q2 = Question.create(
           content: "test",
-          duedate: DateTime.now + 2.days,
+          duedate: Date.today + 2.days,
           user_id: 1
       )
       4.times do
         answer = Answer.create(
-            question_id: 2,
+            question_id: q2.id,
             content: "test"
         )
         end
       q3 = Question.create(
           content: "test",
-          duedate: DateTime.now + 2.days,
+          duedate: Date.today + 2.days,
           user_id: 1
       )
       2.times do
         answer = Answer.create(
-          question_id: 3,
+          question_id: q3.id,
           content: "test"
       )
       end
       q4 = Question.create(
           content: "test",
-          duedate: DateTime.now + 2.days,
+          duedate: Date.today + 2.days,
           user_id: 1
       )
         answer = Answer.create(
-            question_id: 4,
+            question_id: q4.id,
             content: "yes"
         )
         answer = Answer.create(
             question_id: 4,
             content: "no"
         )
-
-      assert q1.answers.count > 2 && q2.answers.count > 2
-      refute q3.answers.count > 2 && q4.answers.count > 2
+      # binding.pry
+      assert q1.multiple_choice?
+      assert q2.multiple_choice?
+      refute q3.multiple_choice?
+      refute q4.multiple_choice?
     end
 
 
