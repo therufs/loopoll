@@ -28,7 +28,7 @@ class Question < ActiveRecord::Base
   def owner(user)
     user_id == user.id
   end
-  
+
   def answered(user)
     results.where(user_id: user.id)
   end
